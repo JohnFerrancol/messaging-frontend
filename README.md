@@ -1,12 +1,13 @@
-# React Template
+# Messaging App Frontend
 
 [Live Demo](#)<br/><br/>
-[Link to Backend](#)<br/><br/>
+[Link to Backend](https://github.com/JohnFerrancol/messaging-backend)<br/><br/>
 [![The Odin Project](https://img.shields.io/badge/The%20Odin%20Project-A9792B?logo=theodinproject&logoColor=fff)](#)
 
 ## Overview
 
-This is a project from [The Odin Project](https://theodinproject.com): [Project: ](#).
+This is a project from [The Odin Project](https://theodinproject.com): [Project: Messaging App](https://www.theodinproject.com/lessons/nodejs-messaging-app). This messaging app is inspired by the [WhatsApp](https://web.whatsapp.com/). This allows users to create a user profile, send messages to each other, have a friends list and create group chats.
+
 
 ## Tech Stack
 
@@ -20,7 +21,7 @@ This is a project from [The Odin Project](https://theodinproject.com): [Project:
 ## Project Structure
 
 ```sh
-photo-tagging-frontend/
+messaging-frontend/
 │
 ├── public/
 │   │
@@ -96,7 +97,7 @@ Getting started on running the vite react server to your localhost, localhost:51
 1. Cloning the repository
 
 ```sh
-git clone git@github.com:JohnFerrancol/XX.git
+git clone git@github.com:JohnFerrancol/messaging-frontend.git
 ```
 
 2. Installing npm packages
@@ -115,5 +116,10 @@ npm run dev
 
 ## Roadmap
 
-- [ ] XXX
-- [ ] XXX
+- [x] Creating the Register Page
+  - [x] Implement the UI to display the register form when the user has not been authenticated yet
+  - [x] Run the HTTP request, POST /api/v1/auth/register to register and authenticate the user
+- [x] Creating the Login Page
+  - [x] Implement the UI to display the login form when the user has not been authenticated yet
+  - [x] Run the HTTP Request, POST /api/v1/auth/login to login and authenticate the user
+
