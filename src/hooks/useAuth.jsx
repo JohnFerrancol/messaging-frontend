@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+
+const AuthContext = createContext();
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const useAuth = () => {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -36,61 +38,65 @@ const useAuth = () => {
   }, [token]);
 
   const loginUser = async (formData) => {
-    try {
-      const response = await fetch(`${API_URL}/api/v1/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+    const response = await fetch(`${API_URL}/api/v1/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
 
-      const userData = await response.json();
-      if (!response.ok) return userData;
+    const userData = await response.json();
 
-      localStorage.setItem('token', userData.token);
-      setToken(userData.token);
-      setUser(userData.user);
+    if (!response.ok) return userData;
 
-      return userData;
-    } catch (error) {
-      console.log(error);
-    }
+    localStorage.setItem('token', userData.token);
+
+    setToken(userData.token);
+    setUser(userData.user);
+
+    return userData;
   };
 
   const registerUser = async (formData) => {
-    try {
-      const response = await fetch(`${API_URL}/api/v1/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+    const response = await fetch(`${API_URL}/api/v1/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
 
-      const userData = await response.json();
-      if (!response.ok) return userData;
+    const userData = await response.json();
 
-      localStorage.setItem('token', userData.token);
-      setToken(userData.token);
-      setUser(userData.user);
+    if (!response.ok) return userData;
 
-      return userData;
-    } catch (error) {
-      console.log(error);
-    }
+    localStorage.setItem('token', userData.token);
+
+    setToken(userData.token);
+    setUser(userData.user);
+
+    return userData;
   };
 
-  const logoutUser = async () => {
+  const logoutUser = () => {
     localStorage.removeItem('token');
     setUser(null);
     setToken(null);
   };
 
-  return {
-    user,
-    token,
-    loading,
-    loginUser,
-    registerUser,
-    logoutUser,
-  };
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        loading,
+        loginUser,
+        registerUser,
+        logoutUser,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export default useAuth;
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

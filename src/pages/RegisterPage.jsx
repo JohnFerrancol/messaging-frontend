@@ -1,6 +1,6 @@
-import useAuth from '../hooks/useAuth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router';
 
 import InputField from '../components/auth/InputField';

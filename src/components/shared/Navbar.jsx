@@ -1,5 +1,4 @@
-import useAuth from '../../hooks/useAuth';
-import { useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
 import NavLink from './NavLink';
 import { FaUser } from 'react-icons/fa';

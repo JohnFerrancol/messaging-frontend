@@ -1,10 +1,10 @@
-import useAuth from '../hooks/useAuth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router';
 
 import InputField from '../components/auth/InputField';
 import { SubmitButton } from '../components/auth/Buttons';
+import { useAuth } from '../hooks/useAuth';
 
 const LoginPage = () => {
   const { loginUser } = useAuth();
