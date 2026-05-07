@@ -1,18 +1,14 @@
-import { useState } from 'react';
 import './styles/App.css';
-import Component from './components/Component';
+import { Outlet } from 'react-router';
+import useAuth from './hooks/useAuth';
+import Navbar from './components/shared/Navbar';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const handleClick = () => {
-    setCount(count + 1);
-  };
-
+  const { user } = useAuth();
   return (
-    <div className="flex justify-center">
-      <h1 className="text-3xl font-bold">{count}</h1>
-      <Component handleClick={handleClick} />
+    <div className={`font-poppins bg-[#101D25] min-h-screen ${user && 'grid grid-cols-5'}`}>
+      {user && <Navbar className="col-span-1" />}
+      <Outlet />
     </div>
   );
 }
